@@ -1,0 +1,106 @@
+@pageBgColor:#fcfcfc; //页面主体背景
+@headerBgColor:#222e41; //头部背景
+@headerHoverColor:#333;  //头部hover 背景
+@siderBgColor:#32c2cd;   // 侧边栏主体背景
+@siderFontColor:#f8f8f8;   // 侧边栏文字颜色
+@siderSelectBgColor:rgba(0,0,0,0.1);   // 侧边栏高亮背景颜色  rgb(251 105 49)
+@siderSelectFontColor:#699fc7;  // 侧边栏高亮文字颜色  .app-main
+
+@tagsViewBg:#dcdcdc;  // 页签栏背景
+@tagsViewBorderColor:#ccc;  // 页签栏边框
+@tagsViewFontColor:rgba(0,0,0,0.65); // 页签栏文字颜色
+
+.ant-layout{
+  background:@pageBgColor url("~@public/body-bg.png");
+  .ant-layout-header{
+    background:@headerBgColor url("~@public/top-bg.jpg");
+    .user-info{
+      li{
+        .ant-popover-inner-content{
+          p{
+            //border-color: @tagsViewBorderColor;
+            &:hover{
+              background-color:@siderSelectBgColor;
+            }
+          }
+        }
+        &:hover{
+          background-color: @headerHoverColor;
+        }
+      }
+    }
+  }
+  .ant-layout-sider{
+    background: @siderBgColor url("~@public/sider-bg.jpg");
+    box-shadow: inset -15px 0px 10px -15px rgba(0,0,0,.5);
+    .ant-menu{
+      background: @siderBgColor url("~@public/sider-bg.jpg");
+      color:@siderFontColor;
+      box-shadow: inset -15px 0px 10px -15px rgba(0,0,0,.5);
+      .ant-menu-submenu{
+        background-color:@siderSelectBgColor;
+        .ant-menu-submenu-title{
+          height: 50px;
+          line-height: 50px;
+          margin: 0;
+          border-bottom: 1px solid rgba(255,255,255,.5);
+          .ant-menu-submenu-arrow{
+            &:before,&:after{
+              background:@siderFontColor;
+            }
+          }
+        }
+        .ant-menu-item{
+          border-bottom: 1px solid #3393a2;
+          &:after{
+            border-right: 3px solid @siderFontColor;
+          }
+        }
+      }
+      .ant-menu-item:hover,
+      .ant-menu-item-active,
+      .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+      .ant-menu-submenu-active,
+      .ant-menu-item-selected,
+      .ant-menu-submenu-selected,
+      .ant-menu-submenu-title:hover{
+        color: @siderFontColor;
+        background-color:@siderSelectBgColor;
+        .ant-menu-submenu-arrow{
+          &:before,&:after{
+            background:@siderFontColor;
+          }
+        }
+      }
+
+    }
+  }
+
+  .ant-layout-content{
+    .app-tags-view{
+      background-color:@tagsViewBg;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+      .views-box ul li{
+        border-color: @tagsViewBorderColor;
+        &.active{
+          background-color: rgba(0,0,0,0.05);
+        }
+      }
+      >span{
+        border-color: @tagsViewBorderColor;
+        &:before{
+          border-color: @tagsViewFontColor;
+        }
+      }
+
+    }
+  }
+
+
+
+  .sim-link{ //span 模拟 a 标签
+    color: #1890ff;
+    line-height: 30px;
+    cursor: pointer;
+  }
+}
