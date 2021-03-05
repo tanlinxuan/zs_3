@@ -6,7 +6,7 @@
 const pageRouter=[
     {
         path: '/',
-        component: () => import('@pages/page2'),
+        component: () => import('@pages/page1'),
     }
 ]
 export default pageRouter

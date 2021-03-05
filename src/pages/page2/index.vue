@@ -1,8 +1,6 @@
 <template>
-    <div class="123"></div>
-    
+    <div>page2</div>
 </template>
-
 <script>
     export default {
         name: "index"
