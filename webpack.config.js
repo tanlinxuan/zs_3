@@ -1,9 +1,7 @@
 const path = require('path');
-const fs = require("fs");
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+
 const {VueLoaderPlugin} = require('vue-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const projectConfig = require('./projectConfig')
@@ -16,8 +14,8 @@ module.exports = {
     } ,
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: isDev ? '[name]/[name].js' : '[name]/[name].[hash:8].js',
-        chunkFilename: isDev ? '[name]/[name].js' : '[name]/[name].[hash:8].js'
+        filename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
+        chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js'
     },
     mode: mode,
     module: {
@@ -128,9 +126,6 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
-        new CleanWebpackPlugin({
-            path: './dist'
-        }),
         ...entrys.HtmlPlugins,
         new MiniCssExtractPlugin({
             filename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
@@ -143,8 +138,8 @@ module.exports = {
         // 将 dll 注入到 生成的 html 模板中
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, './static/*.js'),
+            outputPath: './static',
             publicPath: './static',
-            outputPath: './static'
         })
     ],
 }

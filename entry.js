@@ -14,13 +14,13 @@ let HtmlPlugins=[];
 if(ENTRANCE === 'more'){
     const dirInfo = fs.readdirSync('./src/pages');
     dirInfo.forEach(item=>{
-        //复制公共主入口文件  ，打包完成后，将删除该复制文件
-        fs.writeFileSync(`./src/pages/${item}/main.js`,fs.readFileSync(`./src/main.js`));
-        fs.writeFileSync(`./src/pages/${item}/app.vue`,fs.readFileSync(`./src/app.vue`));
+        // //复制公共主入口文件  ，打包完成后，将删除该复制文件
+        // fs.writeFileSync(`./src/pages/${item}/main.js`,fs.readFileSync(`./src/main.js`));
+        // fs.writeFileSync(`./src/pages/${item}/app.vue`,fs.readFileSync(`./src/app.vue`));
         entry[item]=['babel-polyfill',path.resolve(__dirname, `src/pages/${item}/main.js`)];
         let _html = new HtmlWebpackPlugin({
             template: `./index.html`,
-            filename:`${item}/index.html`,//打包后的文件名
+            filename:`${item}.html`,//打包后的文件名
             inject: true,
             hash: true,
             chunks: [`${item}`],

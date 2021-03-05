@@ -1,6 +1,7 @@
 const webpackConfig = require('./webpack.config.js')
 const WebpackMerge = require('webpack-merge')
 const TerserPlugin = require('terser-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const terserPlugin = new TerserPlugin({
     parallel: 4,
@@ -34,6 +35,9 @@ module.exports = WebpackMerge(webpackConfig,{
         ],
     },
     plugins:[
+        new CleanWebpackPlugin({
+            path: './dist'
+        }),
         new OptimizeCssAssetsPlugin()
     ]
 })

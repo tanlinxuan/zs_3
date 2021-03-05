@@ -4,8 +4,7 @@
   "description": "两江金融监管",
   "main": "main.js",
   "scripts": {
-    "clear": "node clear.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && node clear.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.prod.js",
     "build:dll": "webpack --config webpack.config.dll.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js"

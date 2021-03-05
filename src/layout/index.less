@@ -1,0 +1,176 @@
+.app-header {
+  height: 32px;
+  line-height: 32px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  .logo {
+    width: 160px;
+    height: 32px;
+    display: inline-block;
+    background: url('~@public/pic_logo.png');
+  }
+  .user-info{
+    float:right;
+    display: inline-block;
+    font-size: 14px;
+    li{
+      padding: 0 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+      margin-left: 10px;
+      .ant-popover-inner-content{
+        padding: 6px;
+        p{
+          padding: 0 10px;
+         // border-bottom: 1px solid;
+          height: 32px;
+          line-height: 32px;
+          margin: 5px;
+          cursor: pointer;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+.app-aside {
+  height: calc(100vh - 48px);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  .ant-menu-inline{
+    border-right:none;
+  }
+}
+
+.app-main {
+  width: 100%;
+  height: 100%;
+  .component{
+    height: calc(100% - 40px);
+    padding: 32px 40px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    .main-page{ //页面直接主容器 ，所有路由页面放此class 下
+      width: 100%;
+      min-height: 100%;
+      border-radius: 4px;
+      padding: 30px;
+      padding-bottom: 10px;
+      box-shadow: 0 0 10px #eee;
+      background-color: #fff;
+      .page{
+        width: 100%;
+        height: calc(100vh - 204px);
+      }
+    }
+  }
+  .app-tags-view {
+    height: 40px;
+    line-height: 40px;
+   // border-bottom: 1px solid #d9ecff;
+   // background-color: #fff;
+    >span{
+      display: inline-block;
+      height: 40px;
+      width: 29px;
+      position: relative;
+      &:before{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        display: block;
+        border: 2px solid;
+        border-right: none;
+        border-bottom: none;
+        content: '';
+        margin-left: -10px;
+        margin-top: -5px;
+      }
+     // border: ;
+      &.prev-view{
+        border-right:1px solid;
+        &:before{
+          margin-left: -5px;
+          transform:rotate(-45deg);
+          -ms-transform:rotate(-45deg); 	/* IE 9 */
+          -moz-transform:rotate(-45deg); 	/* Firefox */
+          -webkit-transform:rotate(-45deg); /* Safari 和 Chrome */
+          -o-transform:rotate(-45deg); 	/* Opera */
+        }
+      }
+      &.next-view{
+        border-left:1px solid;
+        &:before{
+          transform:rotate(135deg);
+          -ms-transform:rotate(135deg); 	/* IE 9 */
+          -moz-transform:rotate(135deg); 	/* Firefox */
+          -webkit-transform:rotate(135deg); /* Safari 和 Chrome */
+          -o-transform:rotate(135deg); 	/* Opera */
+        }
+      }
+    }
+    .views-box{
+      width: calc(100% - 60px);
+      height: 40px;
+      display: inline-block;
+      overflow: hidden;
+      ul{
+        height: 100%;
+        white-space: nowrap;
+        li {
+          &:first-child{
+            padding: 0 25px;
+          }
+          display: inline-block;
+          padding: 0 30px 0 20px;
+          border-right: 1px solid;
+          margin-top: -1px;
+          cursor: pointer;
+          position: relative;
+          font-size: 14px;
+          &.active{
+            font-weight: bold;
+          }
+          span{
+            display: block;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          i {
+            right: 6px;
+            top: 14px;
+            position: absolute;
+            &:hover{
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* slide-fade*/
+.slide-fade-leave-active{
+  transition: all .3s ease;
+}
+.slide-fade-enter-active {
+  transition: all .2s ease;
+}
+
+.slide-fade-enter {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
