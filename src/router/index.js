@@ -1,7 +1,7 @@
 /**
  * 路由控制
  * @author 谭邻宣
- * @date 2020/7/4 14:05
+ * @date 2021/03/05 10:13
  **/
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
