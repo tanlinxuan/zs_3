@@ -18,16 +18,16 @@ const getUserPer= (userId)=>{ //获取用户权限信息
         return res.data?res.data:{}
     })
 }
-const getAllUserList= ()=>{ //获取所有用户列表
-    return  HTTP.get(httpServer.login.getAllUserList).then(res=>{
-        return res.data?res.data:{}
-    })
-}
-const getDepartments= ()=>{ //获取部门信息
-    return  HTTP.get(httpServer.userManage.getDepartments).then(res=>{
-        return res.data?flatten(res.data):[]
-    })
-}
+// const getAllUserList= ()=>{ //获取所有用户列表
+//     return  HTTP.get(httpServer.login.getAllUserList).then(res=>{
+//         return res.data?res.data:{}
+//     })
+// }
+// const getDepartments= ()=>{ //获取部门信息
+//     return  HTTP.get(httpServer.userManage.getDepartments).then(res=>{
+//         return res.data?flatten(res.data):[]
+//     })
+// }
 //平铺部门树
 const flatten = arr => arr.reduce((prev, next) => {
     let item = {} ;
@@ -56,14 +56,14 @@ const loginCallBack = (commit , data) =>{
     return Promise.all([
         getUserInfo(data.user_id),  // 请求当前登录用户信息
         getUserPer(),  // 当前登录用户权限
-        getAllUserList() ,  // 缓存所有用户列表
-        getDepartments()  //缓存所有部门信息
+     //   getAllUserList() ,  // 缓存所有用户列表
+      //  getDepartments()  //缓存所有部门信息
     ]).then(res=>{
         //session 存储当前登录用户信息
         commit('USER_LOGIN',res[0]);
         userPer = res[1];
-        sessionStorage.setItem('usersList',JSON.stringify(res[2]));
-        sessionStorage.setItem('departments',JSON.stringify(res[3]));
+       // sessionStorage.setItem('usersList',JSON.stringify(res[2]));
+      //  sessionStorage.setItem('departments',JSON.stringify(res[3]));
         return res[0]
     })
 }

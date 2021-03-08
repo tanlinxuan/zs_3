@@ -33,7 +33,7 @@ HTTP.interceptors.request.use(config => {
                     url_ = config.url;
                     var url_1 = '';
                     Object.getOwnPropertyNames(config.params).forEach(
-                        function (key) {
+                         (key) =>{
                             var link = '&' + key + "=" + config.params[key];
                             url_1 += link;
                         });

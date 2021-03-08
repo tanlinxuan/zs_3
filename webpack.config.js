@@ -138,7 +138,7 @@ module.exports = {
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, './static/*.js'),
             outputPath: './static',
-            publicPath: './static',
+            publicPath: 'static',
         })
     ],
 }

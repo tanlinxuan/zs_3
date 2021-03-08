@@ -39,7 +39,16 @@
                     if (!err) {
                         values.rememberPsw =  rememberPsw
                         that.$store.dispatch('user/userLogin',values).then((res)=>{
-                            that.$router.replace({ path:'/home' })
+                            //登录后校验是否有历史记录页面
+                            let { historyPage } =that.$store.getters
+                            //有则跳转到记录页面
+                            if(historyPage && historyPage!==''){
+                                that.$store.dispatch('user/setHistoryPage','') // 跳转成功后清空historyPage
+                                window.open(historyPage , '_self')
+                            }else{
+                                const url = window.location.origin + '/page2.html'
+                                window.open(url , '_self')
+                            }
                         })
                     }
                 });
@@ -47,13 +56,6 @@
             //记住密码
             handleChange(e) {
                 this.rememberPsw = e.target.checked;
-            },
-            /***
-             *  滑块验证回调
-             * @param status  true : 成功  ， false: 失败
-             */
-            sliderValidate(status){
-                this.status = status
             },
         },
         render() {

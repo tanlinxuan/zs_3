@@ -12,7 +12,8 @@ const getToken= (params)=>{ //通过用户名密码 ，请求token
 const state={ //定义登录用户相关state
   userInfo:{},  //用户信息
   tokensInfo:{}, //token相关
-  perInfo:{} //权限相关
+  historyPage:''  // 发生超时 ，记录当前页面 ， 登录后直接跳转该页面
+ // perInfo:{} //权限相关
 }
 
 const mutations = {
@@ -22,8 +23,12 @@ const mutations = {
   ['SET_SESSION_TOKEN'] (state,data) {
     state.tokensInfo = {...data}
   },
-  ['SET_LOCAL_TOKEN'] (state,data) {
-    localStorage.setItem('tokensInfo',JSON.stringify(data))
+  ['SET_LOCAL_TOKEN'] (state,token) {
+    localStorage.setItem('tokensInfo',JSON.stringify(token))
+  },
+  ['SET_HISTORY_PAGE'](state , url){
+    let history = url!==''?window.location.href:url
+    state.historyPage = history
   },
   ['USER_EXIT'] (state) {  //用户登出
     localStorage.removeItem('tokensInfo')
@@ -45,10 +50,7 @@ const actions = {
         params={login_name, password:CryptoJS.MD5(password).toString()} , //组装请求参数 ，密码 md5 加密
         tokens= await getToken(params); //请求token
     if(!tokens.user_id)  return false
-    //如果勾选记住密码 ，则本地存储local
-    if(rememberPsw){
-      commit('SET_LOCAL_TOKEN',tokens);
-    }
+    commit('SET_LOCAL_TOKEN',tokens);
     let userDetail =await loginCallBack(commit , tokens)
     return userDetail
   },
@@ -59,9 +61,19 @@ const actions = {
     return userDetail
   },
 
+  setHistoryPage({commit},url){
+    if(!url && url===''){  //超时后登录执行跳转，清空 history
+      commit('SET_HISTORY_PAGE',url)
+      return false
+    }
+    commit('SET_HISTORY_PAGE') //记录历史页面
+    commit('USER_EXIT')  //登出
+  },
+
   userExit({ commit }) {
     commit('USER_EXIT')
   }
+
 }
 export default {
   namespaced:true,

@@ -1,3 +1,4 @@
+import store from "@src/store" //加载状态管理
 import {  message ,Modal } from 'ant-design-vue'; //全局注册 message
 import Login from './index'  //主页面
 Vue.prototype.$message = message;
@@ -18,6 +19,7 @@ message.config({
 });
 new Vue({
     el:'#app',
+    store,
     render:(h)=>h(Login)
 })
 

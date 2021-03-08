@@ -3,12 +3,8 @@
  * @author 谭邻宣
  * @date 2020/7/9 17:15
  **/
-//import Vue from 'vue'
-//import Vuex from 'vuex'
 import getters from "./getters";
 import createPersistedState from "vuex-persistedstate" //本地化存储
-
-//Vue.use(Vuex)
 /****
  * 读取modules 下自定义 state ，mutations ，并暴露给全局 ，
  * 文件名作为 state 字段名 ，例： 读取 user.js 下定义的 userInfo , 取 state.user.userInfo
