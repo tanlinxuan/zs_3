@@ -1,0 +1,104 @@
+#login_page{
+  width: 100%;
+  height: 100%;
+ // background: url('~@public/login_bg.png') no-repeat;
+  position: relative;
+  &:before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: url('~@public/login_bg.jpg') no-repeat;
+    background-size: cover;
+    filter: blur(10px);
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .login-content{
+    position: absolute;
+    left: 60%;
+    top:50%;
+    width: 11rem;
+    height: 6.5rem;
+    transform: translate( -50% , -50%);
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);
+    .login-information{
+      height: 100%;
+      background: rgba(121, 106, 238, 0.8);
+      color: #fff;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      position: relative;
+      .name{
+        position: absolute;
+        width: 2rem;
+        top:40%;
+        transform: translateY(-50%);
+        color: #fff;
+        padding-left: .5rem;
+        span{
+          display: block;
+        }
+      }
+    }
+    .login-form{
+      height: 100%;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background-color: #fff;
+      border: 1px solid #e8e8e8;
+      .form-box{
+        width: 100%;
+        height: 100%;
+        padding: .4rem;
+        position: relative;
+        .ant-form{
+          position: absolute;
+          width: 100%;
+          padding: .4rem;
+          top: 50%;
+          transform: translateY(-50%);
+          .ant-input-affix-wrapper{
+            font-size: .18rem;
+            .ant-input{
+              border: none;
+              border-bottom: 1px solid #ccc;
+              border-radius: 0;
+              font-size: .16rem;
+              height: .4rem;
+              &:not(:first-child){
+                padding-left: .45rem;
+              }
+              &:focus{
+                box-shadow: none;
+                border: none;
+                border-bottom: 1px solid rgba(121, 106, 238, 1);
+              }
+            }
+          }
+          .link{
+            color:#40a9ff;
+            margin: 0 .1rem;
+            cursor: pointer;
+          }
+          .login-form-button{
+            width: 100%;
+            background-color: rgba(121, 106, 238, 1);
+            border-color: rgba(121, 106, 238, 1);
+            height: .36rem;
+          }
+          .new_password{
+            position: absolute;
+            left: 40px;
+            width: calc(100% - 40px);
+            background-color: rgba(0,0,0,0);
+            color:rgba(0,0,0,0);
+            caret-color:rgba(0, 0, 0, 0.65);
+          }
+        }
+      }
+    }
+  }
+}

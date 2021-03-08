@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const {VueLoaderPlugin} = require('vue-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const projectConfig = require('./projectConfig')
@@ -82,7 +81,7 @@ module.exports = {
                             limit: 5 * 1024,
                             esModule: false,
                             outputPath: 'img/',
-                            publicPath: 'img/',
+                            publicPath: '../img',
                             fallback: {
                                 loader: 'file-loader',
                                 options: {
