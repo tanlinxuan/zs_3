@@ -4,7 +4,7 @@
     import moment from 'moment';
     import 'moment/locale/zh-cn';
     moment.locale('en');
-    import '@src/less/common.less'
+    import '@src/common.less'
     export default {
         name: 'Login',
         data(){

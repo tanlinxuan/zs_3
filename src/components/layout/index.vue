@@ -9,8 +9,8 @@
     </a-layout>
 </template>
 <script>
-     import PageHeader from  './header'
-     import Main from  './main'
+     import PageHeader from './header'
+     import Main from './main'
     import './index.less'
     export default {
         name: "PageLayout",

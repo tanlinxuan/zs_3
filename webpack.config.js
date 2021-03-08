@@ -14,7 +14,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
-        chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js'
+        chunkFilename: isDev ? 'js/[id].js' : 'js/[id].[hash:8].js'
     },
     mode: mode,
     module: {
