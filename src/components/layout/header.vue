@@ -1,6 +1,10 @@
 <script type="text/jsx">
+    import Menu from "./menu";
     export default {
         name: 'PageHeader',
+        components:{
+            Menu
+        },
         data() {
             return {
                 popoverShow: false,
@@ -11,18 +15,12 @@
             setPopoverShow() {
                 this.popoverShow = !this.popoverShow
             },
-            setThemePopoverShow(type){
-                this.themePopoverShow = type
-            },
-            checkTheme(type){
-                document.getElementById('app').className = '';
-                document.getElementById('app').classList.add(type);
-                this.themePopoverShow = false
-            },
             exit(){
                 let that = this;
                 that.$store.dispatch('user/userExit',{}).then(()=>{
-                    that.$router.replace({ path:'/login'})
+                    const origin = window.location.origin
+                    const loginUrl = origin +'/login.html';
+                    window.open(loginUrl,'_self')
                 })
             }
         },
@@ -31,6 +29,9 @@
             return (
                 <div class="app-header">
                     <div class="logo"></div>
+                    <div class="menu-box">
+                        <Menu/>
+                    </div>
                     <div class="user-info">
                         <ul>
                             <li class="user" title={userInfo.user_name}>
@@ -48,16 +49,6 @@
                                 </a-popover>
                             </li>
                             <li title='消息' style={{fontSize:'18px'}}><a-icon type="message" /></li>
-                            <li title='设置' style={{fontSize:'18px'}}>
-                                <a-popover visible={this.themePopoverShow}
-                                           getPopupContainer={triggerNode => triggerNode.parentNode}>
-                                    <template slot="content">
-                                        <p onClick={()=>this.checkTheme('green')}>风格1</p>
-                                        <p onClick={()=>this.checkTheme('blue')}>风格2</p>
-                                    </template>
-                                    <a-icon type="setting" onClick={this.setThemePopoverShow}/>
-                                </a-popover>
-                            </li>
                         </ul>
                     </div>
                 </div>

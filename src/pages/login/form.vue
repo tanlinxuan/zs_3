@@ -45,8 +45,8 @@
                             if(historyPage && historyPage!==''){
                                 that.$store.dispatch('user/setHistoryPage','') // 跳转成功后清空historyPage
                                 window.open(historyPage , '_self')
-                            }else{
-                                const url = window.location.origin + '/page2.html'
+                            }else{  // 否则跳转到首页
+                                const url = window.location.origin + '/home.html'
                                 window.open(url , '_self')
                             }
                         })

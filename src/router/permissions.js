@@ -12,21 +12,22 @@ const loginUrl = origin +'/login.html';
 const permissions = (router)=>{
     router.beforeEach(async(to, from, next) => {
         NProgress.start();
-        const {access_token} = store.getters.tokensInfo;
-        if (access_token) { // 判断是否已登录
-            next()
-        }else{
-            const tokensInfo= localStorage.getItem("tokensInfo");
-            if(tokensInfo) { // 判断local中是否已经有token（其他页面已登录）
+        //读取本地localStorage 中是否有用户信息
+        const tokensInfo= localStorage.getItem("tokensInfo");
+        // 判断是否已登录
+        if(tokensInfo){
+            const {access_token} = store.getters.tokensInfo; //判断当前页面是否初次加载
+            if(access_token){
+                next()
+            }else{
                 store.dispatch('user/setLocalTokens', JSON.parse(tokensInfo)).then(()=>{
                     next();
                 })
-            }else{  // 跳转登录页
-                debugger
-                store.dispatch('user/setHistoryPage').then(()=>{
-                    window.open(loginUrl,'_self')
-                })
             }
+        }else{
+            store.dispatch('user/setHistoryPage').then(()=>{
+                window.open(loginUrl,'_self')
+            })
         }
         // const {access_token} = store.getters.tokensInfo;
         // if (access_token) { // token 是否存在

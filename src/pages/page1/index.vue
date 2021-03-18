@@ -1,10 +1,9 @@
 <template>
-    <div>page1</div>
+    <div><router-view /></div>
 </template>
-
 <script>
     export default {
-        name: "index"
+        name: "page1"
     }
 </script>
 

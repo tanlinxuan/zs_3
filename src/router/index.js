@@ -7,18 +7,15 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
-
 const createRouter = constantRoutes => new VueRouter({
     routes: constantRoutes
 })
-
-const modulesFiles = require.context('./modules', true, /\.js$/)
-
+const modulesFiles = require.context('./modules', true, /\.js$/);
 let routers = modulesFiles.keys().reduce((routers, modulePath) => {
     const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-    const value = modulesFiles(modulePath)
+    const value = modulesFiles(modulePath).default
     const constantRoutes = [
-        ...value.default
+        ...value
     ]
     routers[moduleName] = createRouter(constantRoutes)
     return routers

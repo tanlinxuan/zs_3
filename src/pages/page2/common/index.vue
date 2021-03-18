@@ -1,9 +1,9 @@
 <template>
-    <div><router-view /></div>
+    <div>common</div>
 </template>
 <script>
     export default {
-        name: "page2"
+        name: "common"
     }
 </script>
 

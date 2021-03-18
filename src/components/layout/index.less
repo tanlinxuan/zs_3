@@ -1,19 +1,21 @@
 .app-header {
-  height: 32px;
-  line-height: 32px;
-  color: #ffffff;
+  height: 38px;
+  line-height: 38px;
   display: flex;
   justify-content: space-between;
+  font-size: 14px;
   .logo {
     width: 160px;
-    height: 32px;
+    height: 38px;
     display: inline-block;
-    background: url('~@public/pic_logo.png');
+    background: url('~@public/pic_logo.png') no-repeat;
+    background-position: left center;
+  }
+  .menu-box{
+    flex: 1;
+    padding: 0 50px;
   }
   .user-info{
-    float:right;
-    display: inline-block;
-    font-size: 14px;
     li{
       padding: 0 10px;
       border-radius: 4px;
