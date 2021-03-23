@@ -6,7 +6,7 @@
 
 
 /***
- *  保留两位小数 ，不四舍五入 ，且末尾不为零 ，不补零
+ *  字符串操作，保留两位小数 ，不四舍五入 ，且末尾不为零 ，不补零
  * @param num  Number  需要转换的数字
  * @param decimal  Number  // 小数位， 默认长度2
  * @returns {string|number}
@@ -35,6 +35,19 @@ export function formatDecimal(num, decimal) {
         return parseFloat(sInt)
     }
 
+}
+
+/***
+ * Math.pow， 保留两位小数 ，不四舍五入 ，且末尾不为零 ，不补零 ，大数字不精确
+ * @param num  Number  需要转换的数字
+ * @param decimal  Number  // 小数位， 默认长度2
+ * @returns {string|number}
+ */
+export function toFixed (num, decimal){
+    let dec = decimal || 2;
+    let isNum = typeof num === 'number' && !isNaN(num);
+    if (!isNum) return '-';  // 如果非数字类型 ，返回 ' - '
+    return ~~(Math.pow(10, dec) * num) / Math.pow(10, dec)
 }
 
 
