@@ -20,7 +20,7 @@
                 that.$store.dispatch('user/userExit',{}).then(()=>{
                     const origin = window.location.origin
                     const loginUrl = origin +'/login.html';
-                    window.open(loginUrl,'_self')
+                    window.open(loginUrl)
                 })
             }
         },

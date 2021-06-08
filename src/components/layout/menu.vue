@@ -42,7 +42,7 @@
 
             goPage(path){
                 const origin = window.location.origin
-                window.open(origin+path,'_self')
+                window.open(origin+path)
             },
 
             renderMenuDom(){
@@ -76,7 +76,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>
