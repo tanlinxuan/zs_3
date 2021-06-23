@@ -7,21 +7,21 @@
             }
         },
         created() {
-           this.getMenu()
+          // this.getMenu()
         },
         methods:{
             getMenu(){
-                const modulesFiles = require.context('@router/modules', true, /\.js$/);
-                let menu = modulesFiles.keys().reduce((routers, modulePath) => {
-                    const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-                    const value = modulesFiles(modulePath).default
-                    if(value.length && value[0].isMenu ){
-                        value[0].name = moduleName;
-                        routers.push(this.setMenuItem(value[0]))
-                    }
-                    return routers
-                },[])
-                this.menuList = menu
+                // const modulesFiles = require.context('@router/modules', true, /\.js$/);
+                // let menu = modulesFiles.keys().reduce((routers, modulePath) => {
+                //     const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+                //     const value = modulesFiles(modulePath).default
+                //     if(value.length && value[0].isMenu ){
+                //         value[0].name = moduleName;
+                //         routers.push(this.setMenuItem(value[0]))
+                //     }
+                //     return routers
+                // },[])
+                // this.menuList = menu
             },
             setMenuItem(menu,path){
                 let basePath = !path ?`/${menu.name}.html#/`:`${path}${menu.name}/`
@@ -67,9 +67,7 @@
         render() {
             return(
                 <div>
-                    {
-                        this.menuList.length && this.renderMenuDom()
-                    }
+
                 </div>
             )
 

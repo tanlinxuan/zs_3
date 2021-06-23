@@ -18,9 +18,7 @@
             exit(){
                 let that = this;
                 that.$store.dispatch('user/userExit',{}).then(()=>{
-                    const origin = window.location.origin
-                    const loginUrl = origin +'/login.html';
-                    window.open(loginUrl)
+                    that.$router.replace({ path:'/login'})
                 })
             }
         },
@@ -30,7 +28,7 @@
                 <div class="app-header">
                     <div class="logo"></div>
                     <div class="menu-box">
-                        <Menu/>
+
                     </div>
                     <div class="user-info">
                         <ul>

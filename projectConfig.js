@@ -4,12 +4,9 @@
  * @date 2020/7/13 9:40
  **/
 const path = require('path');
-const { entry, HtmlPlugins } =require('./entry')
-const entrys={ entry, HtmlPlugins }
 const projectConfig={
     port:8093,  //端口
     host:'127.0.0.1', // host
-    entrys:entrys,  // 入口文件,
     mode:process.env.NODE_ENV || 'development' , // 环境
     alias:{ //静态文件路径别名配置
         //'vue$':'vue/dist/vue.esm.js',  // 防止依赖 VUE 版本不一致

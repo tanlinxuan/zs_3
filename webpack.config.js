@@ -1,16 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {VueLoaderPlugin} = require('vue-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const projectConfig = require('./projectConfig')
-const {entrys, mode, alias} = projectConfig
+const { mode, alias} = projectConfig
 const isDev = mode === 'development' ? true : false
 
 module.exports = {
-    entry:{
-        ...entrys.entry
-    } ,
+    entry: [
+        'babel-polyfill',
+        path.resolve(__dirname, 'src/main.js'),
+    ],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
@@ -125,15 +127,25 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
-        ...entrys.HtmlPlugins,
+
+        new HtmlWebpackPlugin({
+            template: './index.html',
+            inject: 'body',
+            minify: {
+                removeComments: true
+            }
+        }),
+
         new MiniCssExtractPlugin({
             filename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
             chunkFilename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
         }),
+
         new webpack.DllReferencePlugin({
             context: '.',
             manifest: require('./static/vendor-manifest.json')
         }),
+
         // 将 dll 注入到 生成的 html 模板中
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, './static/*.js'),
