@@ -2,21 +2,22 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const projectConfig = require('./projectConfig')
-const { mode, alias} = projectConfig
+const {entry, mode, alias} = projectConfig
 const isDev = mode === 'development' ? true : false
-
 module.exports = {
     entry: [
         'babel-polyfill',
-        path.resolve(__dirname, 'src/main.js'),
-    ],
+        entry || path.resolve(__dirname, 'src/main.js'),
+    ] ,
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
-        chunkFilename: isDev ? 'js/[id].js' : 'js/[id].[hash:8].js'
+        chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js'
     },
     mode: mode,
     module: {
@@ -83,7 +84,7 @@ module.exports = {
                             limit: 5 * 1024,
                             esModule: false,
                             outputPath: 'img/',
-                            publicPath: '../img',
+                            publicPath: '../img/',
                             fallback: {
                                 loader: 'file-loader',
                                 options: {
@@ -127,7 +128,15 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
-
+        new CleanWebpackPlugin({
+            path: './dist'
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, 'src/public/js/*.js'),
+                to: 'js/[name].js',
+            }
+        ]),
         new HtmlWebpackPlugin({
             template: './index.html',
             inject: 'body',
@@ -135,22 +144,19 @@ module.exports = {
                 removeComments: true
             }
         }),
-
         new MiniCssExtractPlugin({
             filename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
             chunkFilename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
         }),
-
         new webpack.DllReferencePlugin({
             context: '.',
             manifest: require('./static/vendor-manifest.json')
         }),
-
         // 将 dll 注入到 生成的 html 模板中
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, './static/*.js'),
-            outputPath: './static',
-            publicPath: 'static',
+            publicPath: './static',
+            outputPath: './static'
         })
     ],
 }
