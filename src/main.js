@@ -1,7 +1,7 @@
 import echarts from 'echarts' // 全局注册echarts
 import {  message ,Modal } from 'ant-design-vue'; //全局注册 message
 import router from '@src/router' // 挂载路由
-import '@src/router/permissions' // 挂载路由权限校验
+//import '@src/router/permissions' // 挂载路由权限校验
 import store from "@src/store" //加载状态管理
 import app from '@src/app'  //主页面
 

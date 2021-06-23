@@ -10,14 +10,18 @@ module.exports = WebpackMerge(webpackConfig,{
         host:host,
         open:true,
         hot:true,
-        overlay:{erros:true},
-        openPage:'#/home',
-        // noInfo:true,
-        // headers:{
-        //     "Access-Control-Allow-Origin":"*"
-        // },
-        // hotOnly:false,
-        // disableHostCheck:true,
+        overlay: {
+            warnings: false,
+            errors: true
+        },
+        openPage:'/home',
+        headers:{
+            "Access-Control-Allow-Origin":"*"
+        },
+        historyApiFallback: {
+            index: '/index.html'
+        },
+        disableHostCheck:true,
         proxy: {
             ...proxy
         }

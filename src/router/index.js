@@ -20,7 +20,6 @@ const constantRoutes = [
     {
         path: '/',
         component: PageLayout,
-        redirect: '/home',
         children: [
             {
                 path: 'home',
@@ -34,6 +33,8 @@ const constantRoutes = [
 
 
 const createRouter = () => new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
     routes: constantRoutes
 })
 const router = createRouter()
