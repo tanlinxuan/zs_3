@@ -13,10 +13,9 @@ VueRouter.prototype.push = function push(location) {
 
 const constantRoutes = [
     {
-        path: 'login',
-        name: 'login',
+        path: '/login',
         component: () => import('@pages/login'),
-        meta: { title: '登录', affix: true }
+        hidden: true
     },
     {
         path: '/',

@@ -11,7 +11,7 @@ module.exports = WebpackMerge(webpackConfig,{
         open:true,
         hot:true,
         overlay:{erros:true},
-        openPage:'/home',
+        openPage:'#/home',
         // noInfo:true,
         // headers:{
         //     "Access-Control-Allow-Origin":"*"
