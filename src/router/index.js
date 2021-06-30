@@ -19,22 +19,20 @@ const constantRoutes = [
     },
     {
         path: '/',
-        component: PageLayout,
-        children: [
-            {
-                path: 'home',
-                name: 'home',
-                component: () => import('@pages/home'),
-                meta: { title: '工作台', affix: true }
-            },
-        ]
+        redirect: '/home',
+    },
+    {
+        path: '/home',
+        name: 'home',
+        component: () => import('@pages/home'),
+        meta: { title: '工作台', affix: true }
     }
 ]
 
 
 const createRouter = () => new VueRouter({
     mode: 'history',
-    base: process.env.BASE_URL,
+    base: window.__POWERED_BY_QIANKUN__ ? '/zs3' :process.env.BASE_URL,
     routes: constantRoutes
 })
 const router = createRouter()

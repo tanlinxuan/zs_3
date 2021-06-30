@@ -10,11 +10,10 @@ import {  message } from 'ant-design-vue';
 const HTTP = axios.create({
     timeout: 10 * 1000, //10s 超时
 })
-const baseUrl = process.env.NODE_ENV==='development'?'j-fin.ihdwork.com':window.location.host
 
 HTTP.interceptors.request.use(config => {
         const { mac_key ,access_token} = store.getters.tokensInfo;
-        config.headers['HD-App-Code'] = 'hd.youqi.web.v10';
+        config.headers['HD-App-Code'] = APP_CODE;
         config.headers['Content-Type'] = 'application/json;charset=utf-8';
         if(config.url.indexOf('/v0.1/tokens') > 0){
             return config
@@ -41,7 +40,7 @@ HTTP.interceptors.request.use(config => {
                 } else {
                     url_ = config.url;
                 }
-                var mac = nonce + '\n' + config.method.toUpperCase() + '\n' + url_ + '\n' + baseUrl + '\n';
+                var mac = nonce + '\n' + config.method.toUpperCase() + '\n' + url_ + '\n' + BASE_URL + '\n';
                 const hash = CryptoJS.HmacSHA256(mac, key);
                 var macAsign = CryptoJS.enc.Base64.stringify(hash);
                 config.headers['Authorization'] = 'MAC id=' + access_token + ', nonce="' + nonce + '", mac="' + macAsign + '"';

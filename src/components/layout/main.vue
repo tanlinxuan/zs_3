@@ -1,10 +1,6 @@
 <template>
     <div class="app-main">
-        <transition name="slide-fade" mode="out-in">
-            <keep-alive :include="keepAlive">
-                <router-view :key="key"/>
-            </keep-alive>
-        </transition>
+        <router-view :key="key"/>
     </div>
 </template>
 <script type="text/jsx">

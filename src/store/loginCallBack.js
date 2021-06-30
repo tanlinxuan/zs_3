@@ -8,7 +8,8 @@ import HTTP from "@httpServer";
 import httpServer from "@httpServer/serverConfig";
 
 const getUserInfo= (userId)=>{ //获取当前用户信息
-    return  HTTP.get(httpServer.login.getUserInfo(userId)).then(res=>{
+    let url = httpServer.login.getUserInfo(userId)
+    return  HTTP.get(url).then(res=>{
         return res.data?res.data:{}
     })
 }
@@ -18,16 +19,6 @@ const getUserPer= (userId)=>{ //获取用户权限信息
         return res.data?res.data:{}
     })
 }
-// const getAllUserList= ()=>{ //获取所有用户列表
-//     return  HTTP.get(httpServer.login.getAllUserList).then(res=>{
-//         return res.data?res.data:{}
-//     })
-// }
-// const getDepartments= ()=>{ //获取部门信息
-//     return  HTTP.get(httpServer.userManage.getDepartments).then(res=>{
-//         return res.data?flatten(res.data):[]
-//     })
-// }
 //平铺部门树
 const flatten = arr => arr.reduce((prev, next) => {
     let item = {} ;

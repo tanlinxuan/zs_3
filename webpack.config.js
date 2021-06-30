@@ -1,23 +1,26 @@
 const path = require('path');
 const webpack = require('webpack');
+const { name } = require('./package')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const projectConfig = require('./projectConfig')
-const {entry, mode, alias} = projectConfig
+const {entry, mode, alias ,baseUrl ,appCode ,port} = projectConfig
 const isDev = mode === 'development' ? true : false
+
 module.exports = {
     entry: [
-        'babel-polyfill',
         entry || path.resolve(__dirname, 'src/main.js'),
     ] ,
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: `//localhost:${port}/dist`,
         filename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
-        chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js'
+        chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
+        library: `${name}-[name]`,
+        libraryTarget: 'umd',
+        jsonpFunction: `webpackJsonp_${name}`
     },
     mode: mode,
     module: {
@@ -127,16 +130,15 @@ module.exports = {
         'vuex': 'Vuex'
     },
     plugins: [
+        //创建全局变量
+        new webpack.DefinePlugin({
+            BASE_URL:isDev?JSON.stringify(baseUrl):JSON.stringify(window.location.host),
+            APP_CODE:JSON.stringify(appCode),
+        }),
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({
             path: './dist'
         }),
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(__dirname, 'src/public/js/*.js'),
-                to: 'js/[name].js',
-            }
-        ]),
         new HtmlWebpackPlugin({
             template: './index.html',
             inject: 'body',

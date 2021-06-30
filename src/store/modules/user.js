@@ -5,7 +5,12 @@ import loginCallBack from "../loginCallBack"
 
 const getToken= (params)=>{ //通过用户名密码 ，请求token
   return HTTP.post(httpServer.login.getTokens,params).then(res=>{
-    return res.data?res.data:{}
+    let { code , data } = res;
+    if(code === '0000' && data){
+      return data
+    }else{
+      message.error(res.message || '登录失败')
+    }
   })
 }
 

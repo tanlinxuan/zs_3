@@ -1,6 +1,5 @@
 
 <script type="text/jsx">
-    import  Canvas from './canvas'
     import './index.less'
     export default {
         data() {
@@ -10,9 +9,6 @@
                 status:false ,
                 showValidate: false
             };
-        },
-        components:{
-            Canvas
         },
         methods: {
             renderFormDom(fromArr){  // 通过配置文件 ，生成 表单项
@@ -40,6 +36,7 @@
                     if (!err) {
                         values.rememberPsw =  rememberPsw
                         that.$store.dispatch('user/userLogin',values).then((res)=>{
+                            if(!res) return false
                             that.$router.replace({ path:'/home' })
                         })
                     }
@@ -80,7 +77,6 @@
             ] ;
             return(
                 <div id="login_page">
-                    <Canvas/>
                     <div class="login-content">
                         <div class="login-information">
                             <span>两江新区<br/>金融监管大数据平台</span>
